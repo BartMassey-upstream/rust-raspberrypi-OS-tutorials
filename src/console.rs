@@ -43,6 +43,7 @@ pub mod interface {
     /// Console statistics.
     pub trait Statistics {
         /// Return the number of characters written.
+        #[allow(unused)]
         fn chars_written(&self) -> usize {
             0
         }
