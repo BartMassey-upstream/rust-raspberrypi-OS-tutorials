@@ -275,7 +275,7 @@ impl PL011UartInner {
     }
 
     /// Retrieve a character.
-    fn read_char(&mut self, blocking_mode: BlockingMode) -> Option<char> {
+    fn read_char(&mut self, blocking_mode: BlockingMode) -> Option<u8> {
         // If RX FIFO is empty,
         if self.registers.FR.matches_all(FR::RXFE::SET) {
             // immediately return in non-blocking mode.
@@ -374,7 +374,7 @@ impl console::interface::Write for PL011Uart {
 }
 
 impl console::interface::Read for PL011Uart {
-    fn read_char(&self) -> char {
+    fn read_char(&self) -> u8 {
         self.inner
             .lock(|inner| inner.read_char(BlockingMode::Blocking).unwrap())
     }

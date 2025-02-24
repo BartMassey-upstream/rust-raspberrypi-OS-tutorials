@@ -165,7 +165,7 @@ fn kernel_main() -> ! {
 
     // Notify `Minipush` to send the binary.
     for _ in 0..3 {
-        console().write_char(3 as char);
+        console().write_char(3);
     }
 
     // Read the binary's size.
@@ -175,8 +175,8 @@ fn kernel_main() -> ! {
     size |= u32::from(console().read_char() as u8) << 24;
 
     // Trust it's not too big.
-    console().write_char('O');
-    console().write_char('K');
+    console().write_char(b'O');
+    console().write_char(b'K');
 
     let kernel_addr: *mut u8 = bsp::memory::board_default_load_addr() as *mut u8;
     unsafe {
